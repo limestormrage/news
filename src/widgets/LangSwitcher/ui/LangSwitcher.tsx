@@ -3,23 +3,23 @@ import { classNames } from "shared/lib/classNames/classNames";
 import { AppButton, ThemeButton } from "shared/ui/AppButton/AppButton";
 
 export interface LangSwitcherProps {
-	className?: string;
+  className?: string;
 }
 
 export const LangSwitcher = ({ className }: LangSwitcherProps) => {
-	const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-	const toggleLanguage = () => {
-		i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
-	};
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
+  };
 
-	return (
-		<AppButton
-			className={classNames("", {}, [className])}
-			theme={ThemeButton.CLEAR}
-			onClick={toggleLanguage}
-		>
-			{t("Язык")}
-		</AppButton>
-	);
+  return (
+    <AppButton
+      className={classNames("", {}, [className])}
+      theme={ThemeButton.CLEAR}
+      onClick={toggleLanguage}
+    >
+      {t("Язык")}
+    </AppButton>
+  );
 };

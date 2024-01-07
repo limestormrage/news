@@ -1,5 +1,5 @@
 import styles from "./AppLink.module.scss";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { LinkProps } from "react-router-dom";
 import { classNames } from "shared/lib/classNames/classNames";
 import { Link } from "react-router-dom";
@@ -21,10 +21,7 @@ export const AppLink: FC<IAppLinkProps> = ({
   ...otherProps
 }): JSX.Element => {
   return (
-    <Link
-      className={classNames(styles.appLink, {}, [className, styles[theme]])}
-      {...otherProps}
-    >
+    <Link className={classNames(styles.appLink, {}, [className, styles[theme]])} {...otherProps}>
       {children}
     </Link>
   );

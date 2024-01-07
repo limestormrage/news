@@ -21,6 +21,7 @@ export const AppButton: FC<IAppButtonProps> = ({
     <button
       className={classNames(styles.appButton, {}, [className, styles[theme]])}
       {...otherProps}
+      type="button"
     >
       {children}
     </button>

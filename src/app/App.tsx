@@ -6,7 +6,7 @@ import { SideBar } from "widgets/SideBar";
 import { Suspense } from "react";
 
 const App = (): JSX.Element => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div className={`app ${theme}`}>
