@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
+import { AppButton } from "shared/ui/AppButton/AppButton";
 import { LangSwitcher } from "widgets/LangSwitcher";
 import { ThemeSwitcher } from "widgets/ThemeSwitcher";
 import styles from "./SideBar.module.scss";
@@ -17,11 +18,12 @@ export const SideBar = ({ className }: SideBarProps): JSX.Element => {
 
   return (
     <div
+      data-testid="sidebar"
       className={classNames(styles.sideBar, { [styles.sideBarCollapsed]: collapsed }, [className])}
     >
-      <button onClick={onToggle} type="button">
+      <AppButton data-testid="sidebar-toggle" onClick={onToggle}>
         toggle
-      </button>
+      </AppButton>
       <div className={styles.switchers}>
         <ThemeSwitcher />
         <LangSwitcher />
