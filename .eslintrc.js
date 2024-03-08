@@ -9,6 +9,7 @@ module.exports = {
     "plugin:react/recommended",
     "prettier",
     "plugin:i18next/recommended",
+    "plugin:storybook/recommended"
   ],
   overrides: [
     {
@@ -18,6 +19,12 @@ module.exports = {
       files: [".eslintrc.{js,cjs}"],
       parserOptions: {
         sourceType: "script",
+      },
+    },
+    {
+      files: ["**/src/**/*.test.{ts,tsx}"],
+      rules: {
+        "i18next/no-literal-string": "off",
       },
     },
   ],
@@ -40,5 +47,12 @@ module.exports = {
     "react/button-has-type": "error",
     "react/jsx-props-no-spreading": "warn",
     "object-curly-spacing": ["error", "always"],
+    "i18next/no-literal-string": [
+      "error",
+      { markupOnly: true, ignoreAttribute: ["data-testid", "to"] },
+    ],
+  },
+  globals: {
+    __IS_DEV__: true,
   },
 };
