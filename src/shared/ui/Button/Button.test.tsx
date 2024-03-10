@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { AppButton } from "shared/ui/AppButton/AppButton";
+import { Button } from "shared/ui/Button/Button";
 
-describe("AppButton", () => {
+describe("Button", () => {
   test("render button", () => {
     const BUTTON_TEXT = "Test";
-    render(<AppButton>{BUTTON_TEXT}</AppButton>);
+    render(<Button>{BUTTON_TEXT}</Button>);
     expect(screen.getByText(BUTTON_TEXT)).toBeInTheDocument();
   });
 });
