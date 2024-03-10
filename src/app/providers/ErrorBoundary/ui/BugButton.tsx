@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AppButton } from "shared/ui/AppButton/AppButton";
+import { Button } from "shared/ui/Button/Button";
 
 //компонент для тестирования ErrorBoundary
 export const BugButton = () => {
@@ -16,5 +16,5 @@ export const BugButton = () => {
   }, [error]);
 
   // eslint-disable-next-line i18next/no-literal-string
-  return <AppButton onClick={throwError}>Выбросить ошибку</AppButton>;
+  return <Button onClick={throwError}>Выбросить ошибку</Button>;
 };

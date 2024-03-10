@@ -1,17 +1,18 @@
-import styles from "./AppButton.module.scss";
+import styles from "./Button.module.scss";
 import { classNames } from "shared/lib/classNames/classNames";
 import { ButtonHTMLAttributes, FC } from "react";
 
 export enum ThemeButton {
   CLEAR = "clear",
+  OUTLINE = "outline",
 }
 
-interface IAppButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   theme?: ThemeButton;
 }
 
-export const AppButton: FC<IAppButtonProps> = ({
+export const Button: FC<IButtonProps> = ({
   children,
   className,
   theme,
@@ -19,7 +20,7 @@ export const AppButton: FC<IAppButtonProps> = ({
 }): JSX.Element => {
   return (
     <button
-      className={classNames(styles.appButton, {}, [className, styles[theme]])}
+      className={classNames(styles.button, {}, [className, styles[theme]])}
       {...otherProps}
       type="button"
     >
