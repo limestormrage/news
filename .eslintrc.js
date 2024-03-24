@@ -9,7 +9,6 @@ module.exports = {
     "plugin:react/recommended",
     "prettier",
     "plugin:i18next/recommended",
-    "plugin:storybook/recommended"
   ],
   overrides: [
     {
@@ -54,5 +53,10 @@ module.exports = {
   },
   globals: {
     __IS_DEV__: true,
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
   },
 };

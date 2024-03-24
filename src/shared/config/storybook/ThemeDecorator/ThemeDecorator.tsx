@@ -1,8 +1,11 @@
 import { Theme } from "app/providers/ThemeProvider";
 import { StoryFn } from "@storybook/react";
 
-export const ThemeDecorator = (theme: Theme) => (StoryComponent: StoryFn) => (
-  <div className={`app ${theme}`}>
-    <StoryComponent />
-  </div>
-);
+// eslint-disable-next-line react/display-name
+export const ThemeDecorator = (theme: Theme) => (StoryComponent: StoryFn) => {
+  return (
+    <div className={`app ${theme}`}>
+      <StoryComponent />
+    </div>
+  );
+};
