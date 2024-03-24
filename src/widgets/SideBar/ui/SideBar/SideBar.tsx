@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
 import { Button } from "shared/ui/Button/Button";
 import { LangSwitcher } from "widgets/LangSwitcher";
@@ -11,6 +12,7 @@ interface SideBarProps {
 
 export const SideBar = ({ className }: SideBarProps): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false);
+  const { t } = useTranslation();
 
   const onToggle = () => {
     setCollapsed((prev) => !prev);
@@ -22,7 +24,7 @@ export const SideBar = ({ className }: SideBarProps): JSX.Element => {
       className={classNames(styles.sideBar, { [styles.sideBarCollapsed]: collapsed }, [className])}
     >
       <Button data-testid="sidebar-toggle" onClick={onToggle}>
-        toggle
+        {t("Переключить")}
       </Button>
       <div className={styles.switchers}>
         <ThemeSwitcher />
