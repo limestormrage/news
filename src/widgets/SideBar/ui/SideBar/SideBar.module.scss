@@ -6,10 +6,6 @@
   transition: width 0.5s ease;
 }
 
-.sideBarCollapsed {
-  width: 80px;
-}
-
 .switchers {
   position: absolute;
   bottom: 20px;
@@ -17,4 +13,48 @@
   justify-content: center;
   width: 100%;
   gap: 20px;
+}
+
+.linkText {
+  margin-left: 10px;
+}
+
+.sideBarCollapsed {
+  width: 80px;
+
+  & .switchers {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  & .linkText {
+    opacity: 0;
+    width: 0;
+    transition: 0.2s opacity;
+  }
+}
+
+.collapseBtn {
+  position: absolute;
+  right: -32px;
+  bottom: 32px;
+}
+
+.links {
+  margin-top: 20px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+}
+
+.linkIcon {
+  fill: var(--inverted-primary-color);
 }
