@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { promisify } = require("util");
 const { readdir, writeFile } = require("fs");
 const { join: joinPath, relative } = require("path");
@@ -5,6 +7,7 @@ const { join: joinPath, relative } = require("path");
 const asyncReaddir = promisify(readdir);
 const writeFileAsync = promisify(writeFile);
 
+// eslint-disable-next-line no-undef
 const lokiDir = joinPath(__dirname, "..", ".loki");
 const actualDir = joinPath(lokiDir, "current");
 const expectedDir = joinPath(lokiDir, "reference");
