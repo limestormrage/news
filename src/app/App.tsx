@@ -1,4 +1,3 @@
-import "./styles/index.scss";
 import { useTheme } from "app/providers/ThemeProvider";
 import { AppRouter } from "./providers/Router";
 import { Navbar } from "widgets/Navbar";
@@ -13,6 +12,7 @@ const App = (): JSX.Element => {
     <div className={`app ${theme}`}>
       <Suspense fallback="">
         <Navbar />
+
         <div className="page-content">
           <SideBar />
           <AppRouter />

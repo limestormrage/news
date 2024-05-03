@@ -32,7 +32,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "react", "prettier", "i18next"],
+  plugins: ["@typescript-eslint", "react", "prettier", "i18next", "react-hooks"],
   rules: {
     "react/jsx-indent": [2, 2],
     "react/jsx-indent-props": [2, 2],
@@ -50,6 +50,8 @@ module.exports = {
       "error",
       { markupOnly: true, ignoreAttribute: ["data-testid", "to"] },
     ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
   },
   globals: {
     __IS_DEV__: true,
