@@ -5,5 +5,7 @@
     "Страница не найдена": "Page not found",
     "Произошла непредвиденная ошибка": "An unexpected error has occurred",
     "Главная": "Main",
-    "О сайте": "About us"
+    "О сайте": "About us",
+    "Введите имя": "Enter a name",
+    "Введите пароль": "Enter password"
 }
