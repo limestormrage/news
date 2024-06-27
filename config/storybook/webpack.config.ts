@@ -1,5 +1,5 @@
 import path from "path";
-import webpack from "webpack";
+import webpack, { DefinePlugin } from "webpack";
 import { buildCssLoader } from "../build/loaders/buildCssLoader";
 import { buildSvgLoader } from "../build/loaders/buildSvgLoader";
 import { BuildPaths } from "../build/types/config";
@@ -12,7 +12,10 @@ export default ({ config }: { config: webpack.Configuration }) => {
     src: path.resolve(__dirname, "..", "..", "src"),
   };
 
-  config.resolve?.modules?.push(paths.src);
+  if (config.resolve?.modules) {
+    config.resolve.modules = [paths.src, "node_modules"];
+  }
+
   config.resolve?.extensions?.push(".ts", ".tsx");
 
   if (config.module?.rules) {
@@ -24,6 +27,12 @@ export default ({ config }: { config: webpack.Configuration }) => {
       return rule;
     });
   }
+
+  config.plugins?.push(
+    new DefinePlugin({
+      __IS_DEV__: true,
+    })
+  );
 
   config.module?.rules?.push(buildSvgLoader());
   config.module?.rules?.push(buildCssLoader(true));

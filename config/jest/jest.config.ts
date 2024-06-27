@@ -11,6 +11,8 @@ export default {
     __IS_DEV__: true,
   },
 
+  transformIgnorePatterns: ["node_modules/(?!axios)"],
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
