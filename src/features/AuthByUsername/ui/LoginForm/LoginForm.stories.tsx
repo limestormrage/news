@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { StoreDecorator } from "shared/config/storybook/StoreDecorator/StoreDecorator";
-import { LoginForm } from "./LoginForm";
+import LoginForm from "./LoginForm";
 
 const meta: Meta<typeof LoginForm> = {
   title: "features/LoginForm",
@@ -8,7 +8,7 @@ const meta: Meta<typeof LoginForm> = {
 
   tags: ["autodocs"],
 
-  argTypes: {},
+  argTypes: {}
 };
 
 export default meta;
@@ -20,10 +20,10 @@ export const Primary: Story = {
     StoreDecorator({
       loginForm: {
         username: "test",
-        password: "testtest",
-      },
-    }),
-  ],
+        password: "testtest"
+      }
+    })
+  ]
 };
 export const WithError: Story = {
   args: {},
@@ -32,10 +32,10 @@ export const WithError: Story = {
       loginForm: {
         username: "test",
         password: "testtest",
-        error: "Error",
-      },
-    }),
-  ],
+        error: "Error"
+      }
+    })
+  ]
 };
 export const Loading: Story = {
   args: {},
@@ -44,8 +44,8 @@ export const Loading: Story = {
       loginForm: {
         username: "test",
         password: "testtest",
-        isLoading: true,
-      },
-    }),
-  ],
+        isLoading: true
+      }
+    })
+  ]
 };
