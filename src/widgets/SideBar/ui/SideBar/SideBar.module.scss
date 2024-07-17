@@ -15,10 +15,6 @@
   gap: 20px;
 }
 
-.linkText {
-  margin-left: 10px;
-}
-
 .sideBarCollapsed {
   width: 80px;
 
@@ -26,12 +22,6 @@
     flex-direction: column;
     align-items: center;
     gap: 0;
-  }
-
-  & .linkText {
-    opacity: 0;
-    width: 0;
-    transition: 0.2s opacity;
   }
 }
 
@@ -48,13 +38,13 @@
   flex-direction: column;
 }
 
-.link {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  opacity: 1;
-}
+// .link {
+//   margin-top: 10px;
+//   display: flex;
+//   align-items: center;
+//   opacity: 1;
+// }
 
-.linkIcon {
-  fill: var(--inverted-primary-color);
-}
+// .linkIcon {
+//   fill: var(--inverted-primary-color);
+// }

@@ -1,0 +1,22 @@
+.link {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+}
+
+.linkIcon {
+  fill: var(--inverted-primary-color);
+}
+
+.linkText {
+  margin-left: 10px;
+}
+
+.sideBarCollapsed {
+  & .linkText {
+    opacity: 0;
+    width: 0;
+    transition: 0.2s opacity;
+  }
+}

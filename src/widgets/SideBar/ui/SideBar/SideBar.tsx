@@ -1,26 +1,30 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { RoutePath } from "shared/config/routeConfig/routeConfig";
+import { memo, useMemo, useState } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
-import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { LangSwitcher } from "widgets/LangSwitcher";
 import { ThemeSwitcher } from "widgets/ThemeSwitcher";
 import styles from "./SideBar.module.scss";
-import MainIcon from "shared/assets/icons/main.svg";
-import AboutIcon from "shared/assets/icons/about.svg";
+import { SideBarItemsList } from "../../model/items";
+import { SideBarItem } from "../SideBarItem/SideBarItem";
 
 interface SideBarProps {
   className?: string;
 }
 
-export const SideBar = ({ className }: SideBarProps): JSX.Element => {
+export const SideBar = memo(({ className }: SideBarProps): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false);
-  const { t } = useTranslation();
 
   const onToggle = () => {
     setCollapsed((prev) => !prev);
   };
+
+  const menuLinks = useMemo(
+    () =>
+      SideBarItemsList.map((item) => (
+        <SideBarItem key={item.text} item={item} collapsed={collapsed} />
+      )),
+    [collapsed]
+  );
 
   return (
     <div
@@ -37,21 +41,13 @@ export const SideBar = ({ className }: SideBarProps): JSX.Element => {
       >
         {collapsed ? ">" : "<"}
       </Button>
-      <div className={styles.links}>
-        <AppLink className={styles.link} to={RoutePath.main} theme={AppLinkTheme.INVERTED}>
-          <MainIcon className={styles.linkIcon} />
-          <span className={styles.linkText}>{t("Главная")}</span>
-        </AppLink>
-
-        <AppLink className={styles.link} to={RoutePath.about} theme={AppLinkTheme.INVERTED}>
-          <AboutIcon className={styles.linkIcon} />
-          <span className={styles.linkText}>{t("О сайте")}</span>
-        </AppLink>
-      </div>
+      <div className={styles.links}>{menuLinks}</div>
       <div className={styles.switchers}>
         <ThemeSwitcher />
         <LangSwitcher short={collapsed} />
       </div>
     </div>
   );
-};
+});
+
+SideBar.displayName = "SideBar";
