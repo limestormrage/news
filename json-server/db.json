@@ -25,5 +25,14 @@
       "password": "123"
     }
   ],
-  "profile": { "name": "typicode" }
+  "profile": {
+    "first": "Дмитрий",
+    "lastname": "Тихонов",
+    "age": "30",
+    "currency": "RUB",
+    "country": "Russia",
+    "city": "Kondopoga",
+    "username": "admin",
+    "avatar": "test"
+  }
 }

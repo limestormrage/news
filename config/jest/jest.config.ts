@@ -8,7 +8,7 @@ import path from "path";
 export default {
   // A set of global variables that need to be available in all test environments
   globals: {
-    __IS_DEV__: true,
+    __IS_DEV__: true
   },
 
   transformIgnorePatterns: ["node_modules/(?!axios)"],
@@ -38,7 +38,7 @@ export default {
   setupFilesAfterEnv: ["<rootDir>config/jest/setupTests.ts"],
   moduleNameMapper: {
     "\\.s?css$": "identity-obj-proxy",
-    "\\.svg": path.resolve(__dirname, "jestEmptyComponent.tsx"),
+    "\\.svg": path.resolve(__dirname, "jestEmptyComponent.tsx")
   },
   // An array of file extensions your modules use
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json", "node"],
@@ -47,7 +47,7 @@ export default {
   rootDir: "../../",
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)"],
+  testMatch: ["<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)"]
   // A list of paths to directories that Jest should use to search for files in
   // roots: ["<rootDir>"],
 

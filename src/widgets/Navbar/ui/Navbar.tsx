@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.scss";
 import { classNames } from "shared/lib/classNames/classNames";
 import { useTranslation } from "react-i18next";
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { LoginModal } from "features/AuthByUsername";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ interface INavbarProps {
   className?: string;
 }
 
-export const Navbar = ({ className }: INavbarProps) => {
+export const Navbar = memo(({ className }: INavbarProps) => {
   const [isAuthModal, setIsAuthModal] = useState(false);
   const authData = useSelector(getUserAuthData);
   const dispatch = useDispatch();
@@ -50,4 +50,6 @@ export const Navbar = ({ className }: INavbarProps) => {
       {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={onCloseAuthModal} />}
     </div>
   );
-};
+});
+
+Navbar.displayName = "Navbar";
