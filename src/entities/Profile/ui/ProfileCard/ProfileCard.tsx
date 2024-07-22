@@ -1,6 +1,4 @@
 import { getProfileDate } from "entities/Profile/model/selectors/getProfileDate/getProfileDate";
-import { getProfileError } from "entities/Profile/model/selectors/getProfileError/getProfileError";
-import { getProfileIsLoading } from "entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { classNames } from "shared/lib/classNames/classNames";

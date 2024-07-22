@@ -1,5 +1,5 @@
 import { MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { classNames } from "shared/lib/classNames/classNames";
+import { classNames, Mods } from "shared/lib/classNames/classNames";
 import { Portal } from "shared/ui/Portal/Portal";
 import styles from "./Modal.module.scss";
 
@@ -16,11 +16,11 @@ const ANIMATION_DELAY = 300;
 export const Modal = ({ className, children, isOpen, onClose, lazy }: ModalProps) => {
   const [isClosing, setIsClosing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | undefined>();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const mods: Record<string, boolean> = {
+  const mods: Mods = {
     [styles.opened]: isOpen,
-    [styles.isClosing]: isClosing,
+    [styles.isClosing]: isClosing
   };
 
   const onContentClick = (e: MouseEvent) => {
@@ -56,7 +56,10 @@ export const Modal = ({ className, children, isOpen, onClose, lazy }: ModalProps
     }
 
     return () => {
-      clearTimeout(timerRef.current);
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [isOpen, onKeyDown]);
