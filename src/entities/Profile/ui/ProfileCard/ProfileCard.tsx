@@ -1,36 +1,134 @@
-import { getProfileDate } from "entities/Profile/model/selectors/getProfileDate/getProfileDate";
+import { Profile } from "../../model/types/profile";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { classNames } from "shared/lib/classNames/classNames";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { classNames, Mods } from "shared/lib/classNames/classNames";
 import { Input } from "shared/ui/Input/Input";
-import { Text } from "shared/ui/Text/Text";
+import { Text, TextAlign, TextTheme } from "shared/ui/Text/Text";
 import styles from "./ProfileCard.module.scss";
+import { Loader } from "shared/ui/Loader/Loader";
+import { Avatar } from "shared/ui/Avatar/Avatar";
+import { Currency, CurrencySelect } from "entities/Currency";
+import { Country } from "entities/Country";
+import { CountrySelect } from "entities/Country/ui/CountrySelect/CountrySelect";
 
 interface ProfileCardProps {
   className?: string;
+  data?: Profile | null;
+  isLoading?: boolean;
+  error?: string | null;
+  readonly?: boolean;
+  onChangeLastName?: (value: string) => void;
+  onChangeFirstName?: (value: string) => void;
+  onChangeCity?: (value: string) => void;
+  onChangeAge?: (value: string) => void;
+  onChangeUserName?: (value: string) => void;
+  onChangeAvatar?: (value: string) => void;
+  onChangeCurrency?: (currency: Currency) => void;
+  onChangeCountry?: (country: Country) => void;
 }
 
-export const ProfileCard = ({ className }: ProfileCardProps) => {
+export const ProfileCard = ({
+  className,
+  data,
+  error,
+  isLoading,
+  readonly,
+  onChangeFirstName,
+  onChangeLastName,
+  onChangeAge,
+  onChangeCity,
+  onChangeAvatar,
+  onChangeUserName,
+  onChangeCountry,
+  onChangeCurrency
+}: ProfileCardProps) => {
   const { t } = useTranslation("profile");
-  const data = useSelector(getProfileDate);
-  // const error = useSelector(getProfileError);
-  // const isLoadingData = useSelector(getProfileIsLoading);
+
+  if (isLoading) {
+    return (
+      <div className={classNames(styles.cardWrapper, {}, [className, styles.loading])}>
+        <Loader />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={classNames(styles.cardWrapper, {}, [className, styles.error])}>
+        <Text
+          theme={TextTheme.ERROR}
+          title={t("Произошла ошибка при загрузке профиля")}
+          text={t("Попробуйте обновить страницу")}
+          align={TextAlign.CENTER}
+        />
+      </div>
+    );
+  }
+
+  const mods: Mods = {
+    [styles.editing]: !readonly
+  };
 
   return (
-    <div className={classNames(styles.cardWrapper, {}, [className])}>
-      <div className={styles.cardHeader}>
-        <Text title={t("Профиль")}></Text>
-        <Button className={styles.editButton} theme={ButtonTheme.OUTLINE}>
-          {t("Редактировать")}
-        </Button>
-      </div>
-      <div className={styles.cardData}>
-        <Input className={styles.cardInput} value={data?.first} placeholder={t("Ваше имя")} />
+    <div className={classNames(styles.cardWrapper, mods, [className])}>
+      <div>
+        {data?.avatar && (
+          <div className={styles.avatarWrapper}>
+            <Avatar src={data?.avatar} size={150} />
+          </div>
+        )}
+        <Input
+          className={styles.cardInput}
+          value={data?.first}
+          placeholder={t("Ваше имя")}
+          onChange={onChangeFirstName}
+          readonly={readonly}
+        />
         <Input
           className={styles.cardInput}
           value={data?.lastname}
           placeholder={t("Ваша фамилия")}
+          onChange={onChangeLastName}
+          readonly={readonly}
+        />
+        <Input
+          className={styles.cardInput}
+          value={data?.age}
+          placeholder={t("Ваша возраст")}
+          onChange={onChangeAge}
+          readonly={readonly}
+        />
+        <Input
+          className={styles.cardInput}
+          value={data?.city}
+          placeholder={t("Город")}
+          onChange={onChangeCity}
+          readonly={readonly}
+        />
+        <Input
+          className={styles.cardInput}
+          value={data?.username}
+          placeholder={t("Имя пользователя")}
+          onChange={onChangeUserName}
+          readonly={readonly}
+        />
+        <Input
+          className={styles.cardInput}
+          value={data?.avatar}
+          placeholder={t("Ссылка на аватар")}
+          onChange={onChangeAvatar}
+          readonly={readonly}
+        />
+        <CurrencySelect
+          className={styles.cardInput}
+          value={data?.currency}
+          onChange={onChangeCurrency}
+          readonly={readonly}
+        />
+        <CountrySelect
+          className={styles.cardInput}
+          value={data?.country}
+          onChange={onChangeCountry}
+          readonly={readonly}
         />
       </div>
     </div>

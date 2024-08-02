@@ -28,11 +28,11 @@
   "profile": {
     "first": "Дмитрий",
     "lastname": "Тихонов",
-    "age": "30",
+    "age": 32,
     "currency": "RUB",
     "country": "Russia",
     "city": "Kondopoga",
     "username": "admin",
-    "avatar": "test"
+    "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
   }
 }
