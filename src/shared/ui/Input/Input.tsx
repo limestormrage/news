@@ -1,13 +1,17 @@
 import { ChangeEvent, InputHTMLAttributes, memo, useEffect, useRef, useState } from "react";
-import { classNames } from "shared/lib/classNames/classNames";
+import { classNames, Mods } from "shared/lib/classNames/classNames";
 import styles from "./Input.module.scss";
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">;
+type HTMLInputProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "value" | "onChange" | "readOnly"
+>;
 
 interface InputProps extends HTMLInputProps {
   className?: string;
-  value?: string;
+  value?: string | number;
   onChange?: (value: string) => void;
+  readonly?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
@@ -19,6 +23,7 @@ export const Input = memo((props: InputProps) => {
     type = "text",
     placeholder,
     autoFocus,
+    readonly,
     ...otherProps
   } = props;
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +41,12 @@ export const Input = memo((props: InputProps) => {
     onChange?.(e.target.value);
     setCaretPosition(e.target.value.length);
   };
+
+  const mods: Mods = {
+    [styles.readonly]: readonly
+  };
+
+  const isCaretVisible = isFocused && !readonly;
 
   useEffect(() => {
     if (autoFocus) {
@@ -57,9 +68,12 @@ export const Input = memo((props: InputProps) => {
           onFocus={onFocusInput}
           onBlur={onBlurInput}
           onSelect={onSelectInput}
+          readOnly={readonly}
           {...otherProps}
         />
-        {isFocused && <span className={styles.caret} style={{ left: `${caretPosition * 9}px` }} />}
+        {isCaretVisible && (
+          <span className={styles.caret} style={{ left: `${caretPosition * 9}px` }} />
+        )}
       </div>
     </div>
   );

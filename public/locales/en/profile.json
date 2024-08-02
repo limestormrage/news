@@ -1,6 +1,16 @@
 {
 	"Редактировать": "Edit",
+	"Сохранить": "Save",
+	"Отменить": "Cancel",
 	"Профиль": "Profile",
 	"Ваше имя": "Your name",
-	"Ваша фамилия": "Your last name"
+	"Ваша фамилия": "Your last name",
+	"Ваша возраст": "Your age",
+	"Город": "City",
+	"Имя пользователя": "Username",
+	"Ссылка на аватар": "Link to the avatar",
+	"Укажите валюту": "Choose currency",
+	"Укажите город": "Choose city",
+	"Произошла ошибка при загрузке профиля": "An error occurred while uploading the profile",
+	"Попробуйте обновить страницу": "Try refreshing the page"
 }
