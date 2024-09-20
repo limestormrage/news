@@ -3,11 +3,12 @@ import { Navbar } from "widgets/Navbar";
 import { SideBar } from "widgets/SideBar";
 import { Suspense, useEffect } from "react";
 import { BugButton } from "./providers/ErrorBoundary/ui/BugButton";
-import { useDispatch } from "react-redux";
-import { userActions } from "entities/User";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInited, userActions } from "entities/User";
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
+  const inited = useSelector(getUserInited);
 
   useEffect(() => {
     dispatch(userActions.initAuthData());
@@ -20,7 +21,7 @@ const App = (): JSX.Element => {
 
         <div className="page-content">
           <SideBar />
-          <AppRouter />
+          {inited && <AppRouter />}
           <BugButton />
         </div>
       </Suspense>
