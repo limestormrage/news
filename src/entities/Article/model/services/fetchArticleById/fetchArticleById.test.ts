@@ -1,8 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ArticleBlockType, ArticleType } from "entities/Article/model/types/article";
-import { StoreDecorator } from "shared/config/storybook/StoreDecorator/StoreDecorator";
-import { Article } from "entities/Article";
-import ArticleDetailsPage from "./ArticleDetailsPage";
+import { TestAsyncThunk } from "shared/lib/tests/TestAsyncThunk/TestAsyncThunk";
+import { Article, ArticleBlockType, ArticleType } from "../../types/article";
+import { fetchArticleById } from "./fetchArticleById";
 
 const article: Article = {
   id: "1",
@@ -74,19 +72,22 @@ const article: Article = {
   ]
 };
 
-const meta: Meta<typeof ArticleDetailsPage> = {
-  title: "pages/ArticleDetailsPage",
-  component: ArticleDetailsPage,
+describe("fetchArticleById", () => {
+  test("success fetchArticleById", async () => {
+    const thunk = new TestAsyncThunk(fetchArticleById);
+    thunk.api.get.mockReturnValue(Promise.resolve({ data: article }));
 
-  tags: ["autodocs"],
+    const result = await thunk.callThunk("");
 
-  argTypes: {}
-};
+    expect(thunk.api.get).toHaveBeenCalled();
+    expect(result.meta.requestStatus).toBe("fulfilled");
+    expect(result.payload).toEqual(article);
+  });
+  test("error fetchArticleById", async () => {
+    const thunk = new TestAsyncThunk(fetchArticleById);
+    thunk.api.get.mockReturnValue(Promise.resolve({ error: "ошибка" }));
+    const result = await thunk.callThunk("");
 
-export default meta;
-type Story = StoryObj<typeof ArticleDetailsPage>;
-
-export const Primary: Story = {
-  args: {},
-  decorators: [StoreDecorator({ articleDetails: { data: article } })]
-};
+    expect(result.meta.requestStatus).toBe("rejected");
+  });
+});

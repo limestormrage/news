@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ArticleBlockType, ArticleType } from "entities/Article/model/types/article";
-import { StoreDecorator } from "shared/config/storybook/StoreDecorator/StoreDecorator";
-import { Article } from "entities/Article";
-import ArticleDetailsPage from "./ArticleDetailsPage";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { fetchArticleById } from "../services/fetchArticleById/fetchArticleById";
+import { Article, ArticleBlockType, ArticleType } from "../types/article";
+import { ArticleDetailsSchema } from "../types/articleDetailsSchema";
+import { articleDetailReducer } from "./articleDetailsSlice";
 
 const article: Article = {
   id: "1",
@@ -74,19 +74,53 @@ const article: Article = {
   ]
 };
 
-const meta: Meta<typeof ArticleDetailsPage> = {
-  title: "pages/ArticleDetailsPage",
-  component: ArticleDetailsPage,
+describe("articleDetailsSlice", () => {
+  test("fetchArticleById service pending", () => {
+    const state: DeepPartial<ArticleDetailsSchema> = {
+      data: null,
+      error: null,
+      isLoading: false
+    };
+    expect(articleDetailReducer(state as ArticleDetailsSchema, fetchArticleById.pending)).toEqual({
+      data: null,
+      isLoading: true,
+      error: null
+    });
+  });
+  test("fetchArticleById service fulfilled", () => {
+    const state: DeepPartial<ArticleDetailsSchema> = {
+      data: null,
+      error: null,
+      isLoading: false
+    };
+    expect(
+      articleDetailReducer(
+        state as ArticleDetailsSchema,
+        fetchArticleById.fulfilled(article, "", "")
+      )
+    ).toEqual({
+      data: article,
+      isLoading: false,
+      error: null
+    });
+  });
+  test("fetchArticleById service rejected", () => {
+    const SERVER_ERROR = "Ошибка сервера";
+    const state: DeepPartial<ArticleDetailsSchema> = {
+      data: null,
+      error: null,
+      isLoading: false
+    };
 
-  tags: ["autodocs"],
+    const action: PayloadAction<string> = {
+      type: fetchArticleById.rejected.type,
+      payload: SERVER_ERROR
+    };
 
-  argTypes: {}
-};
-
-export default meta;
-type Story = StoryObj<typeof ArticleDetailsPage>;
-
-export const Primary: Story = {
-  args: {},
-  decorators: [StoreDecorator({ articleDetails: { data: article } })]
-};
+    expect(articleDetailReducer(state as ArticleDetailsSchema, action)).toEqual({
+      data: null,
+      isLoading: false,
+      error: SERVER_ERROR
+    });
+  });
+});

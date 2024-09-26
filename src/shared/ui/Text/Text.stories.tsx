@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Text, TextTheme } from "./Text";
+import { Text, TextSize, TextTheme } from "./Text";
 
 const meta: Meta<typeof Text> = {
   title: "shared/Text",
@@ -9,7 +9,7 @@ const meta: Meta<typeof Text> = {
 
   tags: ["autodocs"],
 
-  argTypes: {},
+  argTypes: {}
 };
 
 export default meta;
@@ -18,42 +18,49 @@ type Story = StoryObj<typeof Text>;
 export const Normal: Story = {
   args: {
     title: "Title lorem",
-    text: "Text lorem",
-  },
+    text: "Text lorem"
+  }
 };
 export const Error: Story = {
   args: {
     title: "Title lorem",
     text: "Text lorem",
-    theme: TextTheme.ERROR,
-  },
+    theme: TextTheme.ERROR
+  }
 };
 export const OnlyTitle: Story = {
   args: {
-    title: "Title lorem",
-  },
+    title: "Title lorem"
+  }
 };
 export const OnlyText: Story = {
   args: {
-    text: "Text lorem",
-  },
+    text: "Text lorem"
+  }
 };
 export const NormalDark: Story = {
   args: {
     title: "Title lorem",
-    text: "Text lorem",
+    text: "Text lorem"
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  decorators: [ThemeDecorator(Theme.DARK)]
 };
 export const OnlyTitleDark: Story = {
   args: {
-    title: "Title lorem",
+    title: "Title lorem"
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  decorators: [ThemeDecorator(Theme.DARK)]
 };
 export const OnlyTextDark: Story = {
   args: {
-    text: "Text lorem",
+    text: "Text lorem"
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  decorators: [ThemeDecorator(Theme.DARK)]
+};
+export const SizeL: Story = {
+  args: {
+    title: "Title lorem",
+    text: "Text lorem",
+    size: TextSize.L
+  }
 };
