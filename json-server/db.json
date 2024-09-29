@@ -107,13 +107,15 @@
       "id": "1",
       "username": "admin",
       "password": "123",
-      "role": "ADMIN"
+      "role": "ADMIN",
+      "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
     },
     {
       "id": "2",
       "username": "Dmitry",
       "password": "123",
-      "role": "USER"
+      "role": "USER",
+      "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
     }
   ],
   "profile": {
