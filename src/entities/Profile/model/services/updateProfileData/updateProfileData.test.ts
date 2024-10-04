@@ -10,7 +10,8 @@ const DATA_VALUE = {
   country: Country.Russia,
   lastname: "limestormrage",
   first: "Dmitry",
-  currency: Currency.RUB
+  currency: Currency.RUB,
+  id: "1"
 };
 
 describe("updateProfileData", () => {

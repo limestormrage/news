@@ -1,7 +1,7 @@
 import styles from "./ArticleDetailsPage.module.scss";
 import { classNames } from "shared/lib/classNames/classNames";
 import { useTranslation } from "react-i18next";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { ArticleDetails } from "entities/Article";
 import { useParams } from "react-router-dom";
 import { CommentList } from "entities/Comment";
@@ -17,6 +17,8 @@ import { getArticleCommentsIsLoading } from "../../model/selectors/comments";
 import { useInitialEffect } from "shared/lib/hooks/useInitialEffect/useInitialEffect";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { fetchCommentsByArticleId } from "pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId/fetchCommentsByArticleId";
+import { AddNewCommentForm } from "features/addNewComment";
+import { addCommentForArticle } from "pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -32,6 +34,13 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
   const comments = useSelector(getArticleComments.selectAll);
   const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
   const dispatch = useAppDispatch();
+
+  const onSendComment = useCallback(
+    (comment: string) => {
+      dispatch(addCommentForArticle(comment));
+    },
+    [dispatch]
+  );
 
   useInitialEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
@@ -51,6 +60,7 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
         <ArticleDetails id={id} />
         <div className={styles.commentsWrapper}>
           <Text title={t("Комментарии")} />
+          <AddNewCommentForm onSendComment={onSendComment} />
           <CommentList comments={comments} isLoading={commentsIsLoading} />
         </div>
       </div>
