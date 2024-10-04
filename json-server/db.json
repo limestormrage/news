@@ -19,7 +19,9 @@
       "img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",
       "views": 1022,
       "createdAt": "26.02.2022",
-      "type": ["IT"],
+      "type": [
+        "IT"
+      ],
       "blocks": [
         {
           "id": "1",
@@ -100,6 +102,12 @@
       "text": "some comment 3",
       "articleId": "1",
       "userId": "1"
+    },
+    {
+      "text": "классно",
+      "articleId": "1",
+      "userId": "2",
+      "id": "AKwu9qC"
     }
   ],
   "users": [
@@ -118,14 +126,28 @@
       "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
     }
   ],
-  "profile": {
-    "first": "Дмитрий",
-    "lastname": "Тихонов",
-    "age": 32,
-    "currency": "RUB",
-    "country": "Russia",
-    "city": "Kondopoga",
-    "username": "admin",
-    "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
-  }
+  "profile": [
+    {
+      "id": "1",
+      "first": "Дмитрий",
+      "lastname": "Тихонов",
+      "age": 32,
+      "currency": "RUB",
+      "country": "Russia",
+      "city": "Kondopoga",
+      "username": "admin",
+      "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
+    },
+    {
+      "id": "2",
+      "first": "Алексей2",
+      "lastname": "Петров",
+      "age": 3,
+      "currency": "RUB",
+      "country": "Russia",
+      "city": "Petrozavodsk",
+      "username": "limestormrage",
+      "avatar": "https://bogatyr.club/uploads/posts/2023-06/1687547393_bogatyr-club-p-oboi-grut-vkontakte-1.jpg"
+    }
+  ]
 }
