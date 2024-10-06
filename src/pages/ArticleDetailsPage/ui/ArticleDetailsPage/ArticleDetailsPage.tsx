@@ -3,7 +3,7 @@ import { classNames } from "shared/lib/classNames/classNames";
 import { useTranslation } from "react-i18next";
 import { memo, useCallback } from "react";
 import { ArticleDetails } from "entities/Article";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CommentList } from "entities/Comment";
 import { Text } from "shared/ui/Text/Text";
 import {
@@ -16,9 +16,11 @@ import { getArticleComments } from "../../model/slice/articleDetailsCommentsSlic
 import { getArticleCommentsIsLoading } from "../../model/selectors/comments";
 import { useInitialEffect } from "shared/lib/hooks/useInitialEffect/useInitialEffect";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
-import { fetchCommentsByArticleId } from "pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId/fetchCommentsByArticleId";
+import { fetchCommentsByArticleId } from "../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId";
 import { AddNewCommentForm } from "features/addNewComment";
-import { addCommentForArticle } from "pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle";
+import { addCommentForArticle } from "../../model/services/addCommentForArticle/addCommentForArticle";
+import { Button } from "shared/ui/Button/Button";
+import { RoutePath } from "shared/config/routeConfig/routeConfig";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -34,6 +36,7 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
   const comments = useSelector(getArticleComments.selectAll);
   const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSendComment = useCallback(
     (comment: string) => {
@@ -41,6 +44,10 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     },
     [dispatch]
   );
+
+  const onBackToList = useCallback(() => {
+    navigate(RoutePath.articles);
+  }, [navigate]);
 
   useInitialEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
@@ -57,6 +64,7 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
   return (
     <DynamicModuleLoader reducers={reducersList} removeAfterUnmount>
       <div className={classNames(styles.pageWrapper, {}, [className])}>
+        <Button onClick={onBackToList}>{t("Назад к списку")}</Button>
         <ArticleDetails id={id} />
         <div className={styles.commentsWrapper}>
           <Text title={t("Комментарии")} />
