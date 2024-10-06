@@ -1,8 +1,6 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { fetchArticleById } from "../services/fetchArticleById/fetchArticleById";
-import { Article, ArticleBlockType, ArticleType } from "../types/article";
-import { ArticleDetailsSchema } from "../types/articleDetailsSchema";
-import { articleDetailReducer } from "./articleDetailsSlice";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Article, ArticleBlockType, ArticleType, ArticleView } from "../../types/article";
+import { ArticleListItem } from "./ArticleListItem";
 
 const article: Article = {
   id: "1",
@@ -78,53 +76,22 @@ const article: Article = {
   ]
 };
 
-describe("articleDetailsSlice", () => {
-  test("fetchArticleById service pending", () => {
-    const state: DeepPartial<ArticleDetailsSchema> = {
-      data: null,
-      error: null,
-      isLoading: false
-    };
-    expect(articleDetailReducer(state as ArticleDetailsSchema, fetchArticleById.pending)).toEqual({
-      data: null,
-      isLoading: true,
-      error: null
-    });
-  });
-  test("fetchArticleById service fulfilled", () => {
-    const state: DeepPartial<ArticleDetailsSchema> = {
-      data: null,
-      error: null,
-      isLoading: false
-    };
-    expect(
-      articleDetailReducer(
-        state as ArticleDetailsSchema,
-        fetchArticleById.fulfilled(article, "", "")
-      )
-    ).toEqual({
-      data: article,
-      isLoading: false,
-      error: null
-    });
-  });
-  test("fetchArticleById service rejected", () => {
-    const SERVER_ERROR = "Ошибка сервера";
-    const state: DeepPartial<ArticleDetailsSchema> = {
-      data: null,
-      error: null,
-      isLoading: false
-    };
+const meta: Meta<typeof ArticleListItem> = {
+  title: "entities/Article/ArticleListItem",
+  component: ArticleListItem,
 
-    const action: PayloadAction<string> = {
-      type: fetchArticleById.rejected.type,
-      payload: SERVER_ERROR
-    };
+  tags: ["autodocs"],
 
-    expect(articleDetailReducer(state as ArticleDetailsSchema, action)).toEqual({
-      data: null,
-      isLoading: false,
-      error: SERVER_ERROR
-    });
-  });
-});
+  argTypes: {}
+};
+
+export default meta;
+type Story = StoryObj<typeof ArticleListItem>;
+
+export const Plate: Story = {
+  args: { article: article, view: ArticleView.PLATE }
+};
+
+export const List: Story = {
+  args: { article: article, view: ArticleView.LIST }
+};
