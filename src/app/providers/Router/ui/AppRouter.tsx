@@ -6,7 +6,7 @@ import { RequireAuth } from "./RequireAuth";
 
 const AppRouter = () => {
   const renderWithWrapper = useCallback((route: AppRouteProps) => {
-    const element = <div className="page-wrapper">{route.element}</div>;
+    const element = <>{route.element}</>;
 
     return (
       <Route
@@ -20,12 +20,7 @@ const AppRouter = () => {
   return (
     <>
       <Suspense fallback={<PageLoader />}>
-        <Routes>
-          {Object.values(routeConfig).map(renderWithWrapper)}
-          {/* {routes.map(({ element, path }) => (
-            <Route key={path} path={path} element={<div className="page-wrapper">{element}</div>} />
-          ))} */}
-        </Routes>
+        <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>
       </Suspense>
     </>
   );

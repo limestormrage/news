@@ -17,9 +17,13 @@ import { fetchArticles } from "../../model/services/fetchArticles";
 import { useSelector } from "react-redux";
 import {
   getArticlesPageError,
+  getArticlesPageHasMore,
   getArticlesPageIsLoading,
+  getArticlesPageNum,
   getArticlesPageView
 } from "../../model/selectors/articlesPageSelectors";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { fetchNextArticles } from "pages/ArticlesPage/model/services/fetchNextArticles/fetchNextArticles";
 
 interface ArticlesPageProps {
   className?: string;
@@ -43,16 +47,24 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
     [dispatch]
   );
 
+  const onLoadNextPart = useCallback(() => {
+    dispatch(fetchNextArticles());
+  }, [dispatch]);
+
   useInitialEffect(() => {
     dispatch(articlesPageActions.initState());
-    dispatch(fetchArticles());
+    dispatch(fetchArticles({ page: 1 }));
   });
+
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <div className={classNames(styles.pageWrapper, {}, [className])}>
+      <PageWrapper
+        className={classNames(styles.pageWrapper, {}, [className])}
+        onScrollEnd={onLoadNextPart}
+      >
         <ArticleViewSelector view={view} changeView={onChangeView} />
         <ArticleList articles={articles} isLoading={isLoading} view={view} />
-      </div>
+      </PageWrapper>
     </DynamicModuleLoader>
   );
 };
