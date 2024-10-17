@@ -22,7 +22,6 @@ const getSkeletons = (view: ArticleView) => {
 export const ArticleList = (props: ArticleListProps) => {
   const { articles, isLoading, view = ArticleView.LIST, className } = props;
   const { t } = useTranslation();
-  console.log(articles);
 
   const renderArticle = (article: Article) => {
     return <ArticleListItem article={article} view={view} key={article.id} />;
