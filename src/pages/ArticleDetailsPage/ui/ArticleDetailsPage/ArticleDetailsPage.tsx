@@ -21,6 +21,7 @@ import { AddNewCommentForm } from "features/addNewComment";
 import { addCommentForArticle } from "../../model/services/addCommentForArticle/addCommentForArticle";
 import { Button } from "shared/ui/Button/Button";
 import { RoutePath } from "shared/config/routeConfig/routeConfig";
+import { PageWrapper } from "widgets/PageWrapper/PageWrapper";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -55,15 +56,15 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
 
   if (!id) {
     return (
-      <div className={classNames(styles.pageWrapper, {}, [className])}>
+      <PageWrapper className={classNames(styles.pageWrapper, {}, [className])}>
         {t("Статья не найдена")}
-      </div>
+      </PageWrapper>
     );
   }
 
   return (
     <DynamicModuleLoader reducers={reducersList} removeAfterUnmount>
-      <div className={classNames(styles.pageWrapper, {}, [className])}>
+      <PageWrapper className={classNames(styles.pageWrapper, {}, [className])}>
         <Button onClick={onBackToList}>{t("Назад к списку")}</Button>
         <ArticleDetails id={id} />
         <div className={styles.commentsWrapper}>
@@ -71,7 +72,7 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
           <AddNewCommentForm onSendComment={onSendComment} />
           <CommentList comments={comments} isLoading={commentsIsLoading} />
         </div>
-      </div>
+      </PageWrapper>
     </DynamicModuleLoader>
   );
 };
