@@ -19,7 +19,7 @@ import {
   getArticlesPageIsLoading,
   getArticlesPageView
 } from "../../model/selectors/articlesPageSelectors";
-import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { PageWrapper } from "widgets/PageWrapper/PageWrapper";
 import { fetchNextArticles } from "../../model/services/fetchNextArticles/fetchNextArticles";
 import { initArticlesPage } from "../../model/services/initArticlesPage/initArticlesPage";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Input } from "shared/ui/Input/Input";
-import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { PageWrapper } from "widgets/PageWrapper/PageWrapper";
 
 const MainPage = (): JSX.Element => {
   const { t } = useTranslation("main");
