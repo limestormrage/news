@@ -51,7 +51,7 @@ export const PageWrapper = ({ className, children, onScrollEnd }: PageWrapperPro
       onScroll={onScrollThrottle}
     >
       {children}
-      <div ref={triggerRef} />
+      {onScrollEnd && <div className={styles.trigger} ref={triggerRef} />}
     </div>
   );
 };
