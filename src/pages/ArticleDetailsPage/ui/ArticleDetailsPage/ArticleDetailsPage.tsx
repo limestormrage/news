@@ -3,7 +3,7 @@ import { classNames } from "shared/lib/classNames/classNames";
 import { useTranslation } from "react-i18next";
 import { memo, useCallback } from "react";
 import { ArticleDetails, ArticleList, ArticleView } from "entities/Article";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CommentList } from "entities/Comment";
 import { Text, TextSize } from "shared/ui/Text/Text";
 import {
@@ -18,16 +18,12 @@ import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { fetchCommentsByArticleId } from "../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId";
 import { AddNewCommentForm } from "features/addNewComment";
 import { addCommentForArticle } from "../../model/services/addCommentForArticle/addCommentForArticle";
-import { Button } from "shared/ui/Button/Button";
-import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import { PageWrapper } from "widgets/PageWrapper/PageWrapper";
 import { getArticleRecommendations } from "../../model/slice/articleDetailsPageRecommendationsSlice";
-import {
-  getArticleRecommendationsError,
-  getArticleRecommendationsIsLoading
-} from "../../model/selectors/recommendations";
+import { getArticleRecommendationsIsLoading } from "../../model/selectors/recommendations";
 import { fetchArticleRecommendations } from "../../model/services/fetchArticleRecommendations/fetchArticleRecommendations";
 import { articleDetailsPageReducer } from "../../model/slice";
+import { ArticleDetailsPageHeader } from "../ArticleDetailsPageHeader/ArticleDetailsPageHeader";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -44,9 +40,7 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
   const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
   const recommendations = useSelector(getArticleRecommendations.selectAll);
   const recommendationsIsLoading = useSelector(getArticleRecommendationsIsLoading);
-  const recommendationsError = useSelector(getArticleRecommendationsError);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSendComment = useCallback(
     (comment: string) => {
@@ -55,10 +49,6 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     [dispatch]
   );
 
-  const onBackToList = useCallback(() => {
-    navigate(RoutePath.articles);
-  }, [navigate]);
-
   useInitialEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
     dispatch(fetchArticleRecommendations());
@@ -66,7 +56,7 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
 
   if (!id) {
     return (
-      <PageWrapper className={classNames(styles.pageWrapper, {}, [className])}>
+      <PageWrapper className={classNames("", {}, [className])}>
         {t("Статья не найдена")}
       </PageWrapper>
     );
@@ -74,8 +64,8 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
 
   return (
     <DynamicModuleLoader reducers={reducersList} removeAfterUnmount>
-      <PageWrapper className={classNames(styles.pageWrapper, {}, [className])}>
-        <Button onClick={onBackToList}>{t("Назад к списку")}</Button>
+      <PageWrapper className={classNames("", {}, [className])}>
+        <ArticleDetailsPageHeader />
         <ArticleDetails id={id} />
         <div className={styles.commentsWrapper}>
           <Text size={TextSize.L} title={t("Рекомендуем")} />

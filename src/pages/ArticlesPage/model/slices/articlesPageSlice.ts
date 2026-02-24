@@ -65,6 +65,8 @@ const articlesPageSlice = createSlice({
       .addCase(fetchArticles.pending, (state, action) => {
         state.isLoading = true;
         state.error = null;
+        state.entities = {};
+        state.ids = [];
 
         if (action.meta.arg.replace) {
           articlesAdapter.removeAll(state);

@@ -45,6 +45,8 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
     dispatch(initArticlesPage(searchParams));
   });
 
+  const test = "ll;";
+
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
       <PageWrapper

@@ -12,5 +12,6 @@
     "Не верный логин или пароль": "Invalid username or password",
     "Выйти": "Logout",
     "Отправить": "Send",
-    "Введите текст комментария": "Enter the comment text"
+    "Введите текст комментария": "Enter the comment text",
+    "Приложение статей": "Article App"
 }
